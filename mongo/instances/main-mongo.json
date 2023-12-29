@@ -1,0 +1,21 @@
+{
+  "$schema": "https://facets-cloud.github.io/facets-schemas/schemas/mongodb/mongodb.schema.json",
+  "version": "0.2",
+  "flavor": "k8s",
+  "kind": "mongo",
+  "metadata": {
+    "name": "main-mongo"
+  },
+  "disabled": true,
+  "test": "${azure_storage_container.storage-3434.out.attributes.container_name}",
+  "spec": {
+    "authenticated": false,
+    "mongodb_version": "6.0.1",
+    "size": {
+      "cpu": "0.5Gi",
+      "memory": "512Mi",
+      "replica_count": 1,
+      "volume": "20Gi"
+    }
+  }
+}

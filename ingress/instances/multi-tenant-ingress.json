@@ -1,0 +1,42 @@
+{
+  "$schema": "https://facets-cloud.github.io/facets-schemas/schemas/loadbalancer/loadbalancer.schema.json",
+  "flavor": "nlb_nginx",
+  "disabled": true,
+  "version": "0.2",
+  "kind": "ingress",
+  "metadata": {
+      "name": "controlplane",
+      "annotations": {}
+  },
+  "advanced": {
+      "nginx_ingress_controller": {
+          "domain_prefix_override": "facetsdemo-new"
+      }
+  },
+  "spec": {
+      "basicAuth": false,
+      "private": false,
+      "force_ssl_redirection": true,
+      "rules": {
+          "multi-tenant-ui": {
+              "domain_prefix": "",
+              "path": "/",
+              "port": "${service.multi-tenant-ui.out.interfaces.main.port}",
+              "service_name": "${service..multi-tenant-ui.out.interfaces.main.name}"
+          },
+          "multi-tenant-node": {
+            "domain_prefix": "",
+            "path": "/",
+            "port": "${service.multi-tenant-node.out.interfaces.main.port}",
+            "service_name": "${service..multi-tenant-node.out.interfaces.main.name}"
+          },
+          "multi-tenant": {
+            "domain_prefix": "",
+            "path": "/",
+            "port": "${service.multi-tenant.out.interfaces.main.port}",
+            "service_name": "${service..multi-tenant.out.interfaces.main.name}"
+          }
+      }
+
+  }
+}

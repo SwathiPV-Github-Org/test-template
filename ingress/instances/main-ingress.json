@@ -1,0 +1,90 @@
+{
+  "$schema": "https://facets-cloud.github.io/facets-schemas/schemas/loadbalancer/loadbalancer.schema.json",
+  "flavor": "nlb_nginx",
+  "disabled": true,
+  "version": "0.1",
+  "kind": "ingress",
+  "metadata": {
+      "name": "controlplane",
+      "annotations": {}
+  },
+  "advanced": {
+      "nginx_ingress_controller": {
+          "domain_prefix_override": "facetsdemo-new"
+      }
+  },
+  "spec": {
+      "basicAuth": false,
+      "private": false,
+      "force_ssl_redirection": true,
+      "rules": {
+          "analytics-ui": {
+              "domain_prefix": "",
+              "path": "/",
+              "port": "${service.analytics-ui.out.interfaces.main.port}",
+              "service_name": "${service..analytics-ui.out.interfaces.main.name}"
+          },
+          "launcher-ui": {
+              "domain_prefix": "",
+              "path": "/",
+              "port": "${service.launcher-ui.out.interfaces.main.port}",
+              "service_name": "${service.launcher-ui.out.interfaces.main.name}"
+          },
+          "backend-0": {
+              "domain_prefix": "",
+              "path": "/api",
+              "port": "${service.control-plane.out.interfaces.http.port}",
+              "service_name": "${service.control-plane.out.interfaces.http.name}"
+          },
+          "auth": {
+            "domain_prefix": "",
+            "path": "/api",
+            "port": "${service.auth.out.interfaces.http.port}",
+            "service_name": "${service.auth.out.interfaces.http.name}"
+          },
+          "analytics-node": {
+            "domain_prefix": "",
+            "path": "/api",
+            "port": "${service.analytics-node.out.interfaces.http.port}",
+            "service_name": "${service.analytics-node.out.interfaces.http.name}"
+          },
+          "analytics": {
+            "domain_prefix": "",
+            "path": "/api",
+            "port": "${service.analytics.out.interfaces.http.port}",
+            "service_name": "${service.analytics.out.interfaces.http.name}"
+          },
+          "launcher-node": {
+            "domain_prefix": "",
+            "path": "/api",
+            "port": "${service.launcher-node.out.interfaces.http.port}",
+            "service_name": "${service.launcher-node.out.interfaces.http.name}"
+          },
+          "notifications-node": {
+            "domain_prefix": "",
+            "path": "/api",
+            "port": "${service.notifications-node.out.interfaces.http.port}",
+            "service_name": "${service.notifications-node.out.interfaces.http.name}"
+          },
+          "notifications-ui": {
+            "domain_prefix": "",
+            "path": "/api",
+            "port": "${service.notifications-ui.out.interfaces.http.port}",
+            "service_name": "${service.notifications-ui.out.interfaces.http.name}"
+          },
+          "notifications": {
+            "domain_prefix": "",
+            "path": "/api",
+            "port": "${service.notifications.out.interfaces.http.port}",
+            "service_name": "${service.notifications.out.interfaces.http.name}"
+          },
+          "user-management-ui": {
+            "domain_prefix": "",
+            "path": "/api",
+            "port": "${service.user-management-ui.out.interfaces.http.port}",
+            "service_name": "${service.user-management-ui.out.interfaces.http.name}"
+          }
+      }
+
+  }
+}

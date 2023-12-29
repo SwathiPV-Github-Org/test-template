@@ -1,0 +1,31 @@
+{
+    "kind": "postgres",
+    "flavor": "aurora",
+    "version": "0.1",
+    "lifecycle": "ENVIRONMENT",
+    "disabled": true,
+    "depends_on": [
+    ],
+    "metadata": {
+      "name": "control-plane-postgres",
+      "tags": {
+        "name": "control-plane-main"
+      }
+    },
+    "spec": {
+      "postgres_version": "12.11",
+      "size": {
+        "writer": {
+          "instance": "db.t3.medium",
+          "replica_count": 1
+        },
+        "reader": {
+          "instance": "db.t3.medium",
+          "replica_count": 1
+        }
+      }
+    },
+    "advanced": {
+    }
+  }
+  
